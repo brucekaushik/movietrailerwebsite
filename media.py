@@ -1,5 +1,6 @@
 import webbrowser
-import requests
+import urllib
+import json
 
 class Movie():
     '''
@@ -31,11 +32,12 @@ class Movie():
         movie_title = movie_title.replace(' ', '+')
 
         # query the api and observe the store the response in a variable
-        response = requests.get('http://www.omdbapi.com/?t=' + movie_title + '&y=&plot=short&r=json')
+        response = urllib.urlopen('http://www.omdbapi.com/?t=' + movie_title + '&y=&plot=short&r=json')
+        data = response.read()
 
-        # check for proper response, and determine which storyline to use (passed/fetched )
-        if(response.status_code == 200):
-            data = response.json()
+        # check for proper response, and determine which storyline to use (passed/fetched)
+        if(data):
+            data = json.loads(data)
             try:
                 storyline = data['Plot'] + '<br/><br/>(fetched from API)'
             except KeyError:
