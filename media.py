@@ -27,10 +27,13 @@ class Movie():
         movie_storyline (str): storyline of the movie
         '''
 
+        # format movie title to query api
         movie_title = movie_title.replace(' ', '+')
 
+        # query the api and observe the store the response in a variable
         response = requests.get('http://www.omdbapi.com/?t=' + movie_title + '&y=&plot=short&r=json')
 
+        # check for proper response, and determine which storyline to use (passed on fetched)
         if(response.status_code == 200):
             data = response.json()
             try:
