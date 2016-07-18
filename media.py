@@ -33,7 +33,7 @@ class Movie():
         # query the api and observe the store the response in a variable
         response = requests.get('http://www.omdbapi.com/?t=' + movie_title + '&y=&plot=short&r=json')
 
-        # check for proper response, and determine which storyline to use (passed on fetched)
+        # check for proper response, and determine which storyline to use (passed/fetched )
         if(response.status_code == 200):
             data = response.json()
             try:
